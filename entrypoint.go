@@ -11,12 +11,16 @@ func init() {
 		core.NewTimeFindeZh02(),
 		core.NewTimeFindeZh03(),
 		core.NewTimeFindeUs01(),
+		core.NewTimeFindeUs02(),
+		core.NewTimeFindeUs03(),
+		core.NewTimeFindeUs04(),
+		core.NewTimeFindeCo01(),
 	)
 }
 
 func RegistFinders(fs ...core.TimeFinder) {
 	for _, v := range fs {
-		finders = append(finders, v) 
+		finders = append(finders, v)
 	}
 }
 
@@ -24,12 +28,10 @@ func FindTime(source string) []core.FinderResult {
 	ret := []core.FinderResult{}
 	for _, v := range finders {
 		fmt.Println(v.GetName())
-		ret=v.Try(source)
-		if len(ret)>0 {
+		ret = v.Try(source)
+		if len(ret) > 0 {
 			break
-		}	
+		}
 	}
 	return ret
 }
-
-

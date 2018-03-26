@@ -6,32 +6,31 @@ import (
 	"strconv"
 )
 
-type TimeFinderZh03 struct {
+type TimeFinderUs04 struct {
 	regexs []*regexp.Regexp
 	err    error
 }
 
-func (self *TimeFinderZh03) GetName() string {
-	return "[ZH-03]"
+func (self *TimeFinderUs04) GetName() string {
+	return "[US-04]"
 }
 
-func (self *TimeFinderZh03) init() {
+func (self *TimeFinderUs04) init() {
 	regexs := []*regexp.Regexp{
-		regexp.MustCompile(`([\d]{4})-([\d]{1,2})-([\d]{1,2})`),
-		regexp.MustCompile(`([\d]{4})/([\d]{1,2})/([\d]{1,2})`),
-		regexp.MustCompile(`([\d]{4})\.([\d]{1,2})\.([\d]{1,2})`),
-		regexp.MustCompile(`([\d]{4})年([\d]{1,2})月([\d]{1,2})日`),
+		regexp.MustCompile(`([\d]{1,2})-([\d]{1,2})-([\d]{4})`),
+		regexp.MustCompile(`([\d]{1,2})/([\d]{1,2})/([\d]{4})`),
+		regexp.MustCompile(`([\d]{1,2})\.([\d]{1,2})\.([\d]{4})`),
 	}
 	self.regexs = regexs
 }
 
-func NewTimeFindeZh03() *TimeFinderZh03 {
-	self := &TimeFinderZh03{}
+func NewTimeFindeUs04() *TimeFinderUs04 {
+	self := &TimeFinderUs04{}
 	self.init()
 	return self
 }
 
-func (self *TimeFinderZh03) Try(source string) []FinderResult {
+func (self *TimeFinderUs04) Try(source string) []FinderResult {
 	ret := []FinderResult{}
 	for _, value := range self.regexs {
 		ts := value.FindAllStringSubmatch(source, -1)
@@ -39,9 +38,9 @@ func (self *TimeFinderZh03) Try(source string) []FinderResult {
 			if len(value2) != 4 {
 				continue
 			}
-			year, _ := strconv.Atoi(value2[1])
+			year, _ := strconv.Atoi(value2[3])
 			month, _ := strconv.Atoi(value2[2])
-			day, _ := strconv.Atoi(value2[3])
+			day, _ := strconv.Atoi(value2[1])
 			timeInt := util.GetTime(year, month, day, 0, 0, 0)
 			tmp := &FinderResult{
 				SourceStr: value2[0],
