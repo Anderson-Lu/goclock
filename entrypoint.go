@@ -1,7 +1,6 @@
 package entrypoint
 
 import core "go_time_finder/core"
-import "fmt"
 
 var finders []core.TimeFinder
 
@@ -27,7 +26,6 @@ func RegistFinders(fs ...core.TimeFinder) {
 func FindTime(source string) []core.FinderResult {
 	ret := []core.FinderResult{}
 	for _, v := range finders {
-		fmt.Println(v.GetName())
 		ret = v.Try(source)
 		if len(ret) > 0 {
 			break
