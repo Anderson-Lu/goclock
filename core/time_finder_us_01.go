@@ -1,7 +1,6 @@
 package core
 
 import (
-	"fmt"
 	util "go_time_finder/util"
 	"regexp"
 	"strconv"
@@ -40,7 +39,6 @@ func (self *TimeFinderUs01) Try(source string) []FinderResult {
 	ret := []FinderResult{}
 	for _, value := range self.regexs {
 		ts := value.FindAllStringSubmatch(source, -1)
-		fmt.Println(ts)
 		for _, value2 := range ts {
 			l := len(value2)
 			if l < 4 {

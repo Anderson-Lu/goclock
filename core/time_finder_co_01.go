@@ -1,7 +1,6 @@
 package core
 
 import (
-	"fmt"
 	"regexp"
 	"strconv"
 	"time"
@@ -36,13 +35,11 @@ func (self *TimeFinderCo01) Try(source string) []FinderResult {
 	ret := []FinderResult{}
 	for _, value := range self.regexs {
 		ts := value.FindAllStringSubmatch(source, -1)
-		fmt.Println(ts)
 		for _, value2 := range ts {
 			l := len(value2)
 			if l != 4 {
 				continue
 			}
-
 			now := time.Now()
 			raw := value2[2]
 			if raw == "s" || raw == "second" || raw == "seconds" || raw == "sec" || raw == "秒" {
@@ -60,8 +57,16 @@ func (self *TimeFinderCo01) Try(source string) []FinderResult {
 			} else {
 				continue
 			}
-
-			timeInt := now.Unix()
+			local1, err1 := time.LoadLocation("")
+			if err1 != nil {
+				continue
+			}
+			local2, err2 := time.LoadLocation("Local")
+			if err2 != nil {
+				continue
+			}
+			time2, _ := time.ParseInLocation("2006-01-02 15:04:05", now.In(local2).Format("2006-01-02 15:04:05"), local1)
+			timeInt := time2.Unix()
 			tmp := &FinderResult{
 				SourceStr: value2[0],
 				ResultStr: value2[0],
