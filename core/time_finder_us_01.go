@@ -1,9 +1,10 @@
 package core
 
 import (
-	util "go_time_finder/util"
 	"regexp"
 	"strconv"
+
+	util "github.com/Anderson-Lu/go_time_finder/util"
 )
 
 type TimeFinderUs01 struct {

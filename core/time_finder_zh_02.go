@@ -1,22 +1,23 @@
 package core
 
 import (
-	"strconv"
 	"regexp"
-	util "go_time_finder/util"
+	"strconv"
+
+	util "github.com/Anderson-Lu/go_time_finder/util"
 )
 
 type TimeFinderZh02 struct {
-	regexs  []*regexp.Regexp
+	regexs []*regexp.Regexp
 	err    error
 }
 
-func (self *TimeFinderZh02) GetName() string{
+func (self *TimeFinderZh02) GetName() string {
 	return "[ZH-02]"
 }
 
 func (self *TimeFinderZh02) init() {
-	regexs := []*regexp.Regexp {
+	regexs := []*regexp.Regexp{
 		regexp.MustCompile(`([\d]{4})-([\d]{1,2})-([\d]{1,2})\s+([\d]{1,2}):([\d]{1,2})`),
 		regexp.MustCompile(`([\d]{4})/([\d]{1,2})/([\d]{1,2})\s+([\d]{1,2}):([\d]{1,2})`),
 		regexp.MustCompile(`([\d]{4})\.([\d]{1,2})\.([\d]{1,2})\s+([\d]{1,2}):([\d]{1,2})`),
@@ -33,26 +34,26 @@ func NewTimeFindeZh02() *TimeFinderZh02 {
 	return self
 }
 
-func (self *TimeFinderZh02) Try(source string) []FinderResult{
+func (self *TimeFinderZh02) Try(source string) []FinderResult {
 	ret := []FinderResult{}
-	for _,value := range self.regexs {
-		ts:=value.FindAllStringSubmatch(source,-1)		
-		for _,value2 := range ts{
-			if len(value2)!= 6 {
+	for _, value := range self.regexs {
+		ts := value.FindAllStringSubmatch(source, -1)
+		for _, value2 := range ts {
+			if len(value2) != 6 {
 				continue
 			}
-			year,_:=strconv.Atoi(value2[1])
-			month,_ := strconv.Atoi(value2[2])
-			day,_:= strconv.Atoi(value2[3])
-			hour,_:=strconv.Atoi(value2[4])
-			min,_:=strconv.Atoi(value2[5])			
-			timeInt := util.GetTime(year,month,day,hour,min,0)
+			year, _ := strconv.Atoi(value2[1])
+			month, _ := strconv.Atoi(value2[2])
+			day, _ := strconv.Atoi(value2[3])
+			hour, _ := strconv.Atoi(value2[4])
+			min, _ := strconv.Atoi(value2[5])
+			timeInt := util.GetTime(year, month, day, hour, min, 0)
 			tmp := &FinderResult{
-				SourceStr:value2[0],
-				ResultStr:value2[0],
-				ResultUTC:timeInt,
+				SourceStr: value2[0],
+				ResultStr: value2[0],
+				ResultUTC: timeInt,
 			}
-			ret = append(ret,*tmp)
+			ret = append(ret, *tmp)
 			break
 		}
 	}
