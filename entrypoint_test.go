@@ -1,9 +1,10 @@
 package entrypoint
 
 import (
-	core "go_time_finder/core"
 	"reflect"
 	"testing"
+
+	core "github.com/Anderson-Lu/go_time_finder/core"
 )
 
 type a struct {
