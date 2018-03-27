@@ -1,6 +1,6 @@
 package entrypoint
 
-import core "go_time_finder/core"
+import core "github.com/Anderson-Lu/go_time_finder/core"
 
 var finders []core.TimeFinder
 
