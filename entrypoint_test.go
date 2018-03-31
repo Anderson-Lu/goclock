@@ -57,6 +57,10 @@ func TestFindTime(t *testing.T) {
 		buildDemo("yyyy/MM/dd", "2018/01/01", 1514764800),
 		buildDemo("yyyy.MM.dd", "2018.01.01", 1514764800),
 		buildDemo("yyyy年MM月dd日", "2018年01月01日", 1514764800),
+		//zh-04
+		buildDemo("MM-dd hh:mm", "03-01 12:10", 1519906200),
+		buildDemo("MM/dd hh:mm", "03-01 12:10", 1519906200),
+		buildDemo("MM年dd月 hh:mm", "03-01 12:10", 1519906200),
 		//us-01
 		buildDemo("May. 23. 1998", "May. 23. 1998", 895881600),
 		buildDemo("May. 23th. 1998", "May. 23th. 1998", 895881600),

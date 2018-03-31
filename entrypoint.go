@@ -9,6 +9,7 @@ func init() {
 		core.NewTimeFindeZh01(),
 		core.NewTimeFindeZh02(),
 		core.NewTimeFindeZh03(),
+		core.NewTimeFindeZh04(),
 		core.NewTimeFindeUs01(),
 		core.NewTimeFindeUs02(),
 		core.NewTimeFindeUs03(),
