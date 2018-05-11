@@ -1,10 +1,30 @@
 GO TIME FINDER
 ---
 
-![author](https://img.shields.io/badge/author-anderson--lu-yellow.svg?longCache=true&style=flat-square|
-![build](https://img.shields.io/badge/build-passing-green.svg?longCache=true&style=flat-square|
+![author](https://img.shields.io/badge/author-anderson--lu-yellow.svg?longCache=true&style=flat-square)
+![build](https://img.shields.io/badge/build-passing-green.svg?longCache=true&style=flat-square)
 
 GO-TIME-FINDER is a text time identification library written by Golang.
+
+Install
+---
+
+```shell
+$ go get github.com/Anderson-Lu/go_time_finder
+```
+
+Usage
+---
+
+```golang
+import core "github.com/Anderson-Lu/go_time_finder/core"
+
+func main() {
+  t := core.FindTime('今天是2018年1月1日')
+  fmt.Println(t)
+}
+```
+
 
 Support Formats
 ---
@@ -39,7 +59,7 @@ Support Formats
 |`July 23, 1998`|`July 23, 1998`|901152000|
 |`July 23th, 1998`|`July 23th, 1998`|901152000|
 |`23 July, 1998`|`July 23, 1998`|901152000|
-|`23th July|1998`|`23th July|1998`|901152000|
+|`23th July 998`|`23th July 1998`|901152000|
 |`23 July. 1998`|`23 July. 1998`|901152000|
 |`23th Jul. 1998`|`23th Jul. 1998`|901152000|
 |`1st Jul. 1998`|`July 1st. 1998`|899251200|
